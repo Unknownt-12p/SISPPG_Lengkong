@@ -86,19 +86,28 @@ class UserController extends Controller
             'name'  => 'required|string|max:255',
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($id)],
             'role'  => 'required|in:admin,instansi',
+            'password' => 'nullable|string|min:6|confirmed',
         ], [
             'name.required'  => 'Nama wajib diisi.',
             'email.required' => 'Email wajib diisi.',
             'email.email'    => 'Format email tidak valid.',
             'email.unique'   => 'Email ini sudah digunakan.',
             'role.required'  => 'Role wajib dipilih.',
+            'password.min'       => 'Password minimal 6 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
 
-        $user->update([
+        $data = [
             'name'  => $request->name,
             'email' => $request->email,
             'role'  => $request->role,
-        ]);
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
 
         return redirect()->route('admin.users.index')
             ->with('success', "Data user {$request->name} berhasil diperbarui!");

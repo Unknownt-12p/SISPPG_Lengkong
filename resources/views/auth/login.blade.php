@@ -197,6 +197,9 @@
                     <input type="password" name="password" id="password" 
                            class="form-control @error('password') is-invalid @enderror" 
                            placeholder="Masukkan password" required>
+                    <button class="btn btn-outline-secondary bg-white text-muted" type="button" id="togglePassword" style="border-color: #dee2e6;">
+                        <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                    </button>
                     @error('password')
                         <div class="invalid-feedback" style="display:block;">
                             {{ $message }}
@@ -249,6 +252,28 @@
     });
 </script>
 @endif
+
+<script>
+    // Toggle Password Visibility
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    const eyeIcon = document.querySelector('#eyeIcon');
+
+    togglePassword.addEventListener('click', function (e) {
+        // Toggle type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Toggle icon
+        if (type === 'text') {
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    });
+</script>
 
 </body>
 </html>

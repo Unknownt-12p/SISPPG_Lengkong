@@ -69,12 +69,40 @@
                         @endif
                     </div>
 
-                    {{-- Info Reset Password --}}
-                    <div class="alert alert-info d-flex align-items-start gap-2 mb-4" style="border-radius: 10px;">
-                        <i class="fas fa-info-circle mt-1"></i>
-                        <div>
-                            <strong>Ingin mengganti password?</strong><br>
-                            Gunakan tombol <strong>Reset Password</strong> di halaman daftar user untuk mereset password ke default (<code>SISPPG123</code>).
+                    <hr class="my-4">
+                    
+                    <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-key text-primary me-2"></i>Ubah Password (Opsional)</h5>
+                    <p class="text-muted small">Kosongkan kolom di bawah ini jika Anda tidak ingin mengubah password user.</p>
+
+                    <div class="row">
+                        <!-- Password Baru -->
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label fw-semibold">Password Baru</label>
+                            <div class="input-group">
+                                <input type="password" name="password" id="password" 
+                                       class="form-control @error('password') is-invalid @enderror" 
+                                       placeholder="Minimal 6 karakter">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword"
+                                        title="Tampilkan/Sembunyikan Password">
+                                    <i class="fas fa-eye" id="eyeIcon"></i>
+                                </button>
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Konfirmasi Password -->
+                        <div class="col-md-6 mb-3">
+                            <label for="password_confirmation" class="form-label fw-semibold">Konfirmasi Password Baru</label>
+                            <div class="input-group">
+                                <input type="password" name="password_confirmation" id="password_confirmation" 
+                                       class="form-control" placeholder="Ulangi password baru">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirm"
+                                        title="Tampilkan/Sembunyikan">
+                                    <i class="fas fa-eye" id="eyeIconConfirm"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -92,4 +120,33 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const input = document.getElementById('password');
+        const icon  = document.getElementById('eyeIcon');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    });
+
+    document.getElementById('toggleConfirm').addEventListener('click', function () {
+        const input = document.getElementById('password_confirmation');
+        const icon  = document.getElementById('eyeIconConfirm');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    });
+</script>
 @endsection

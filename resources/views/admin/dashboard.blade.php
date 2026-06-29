@@ -154,7 +154,7 @@
                 {
                     label: 'Pengajuan Masuk',
                     data: {!! json_encode(array_values($pengajuanPerBulan)) !!},
-                    backgroundColor: 'rgba(255, 193, 7, 0.85)', // Warning Yellow
+                    backgroundColor: 'rgba(7, 98, 255, 0.58)', // Warning Yellow
                     borderColor: 'rgb(255, 193, 7)',
                     borderWidth: 1,
                     borderRadius: 5

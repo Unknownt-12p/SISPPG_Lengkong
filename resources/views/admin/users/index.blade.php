@@ -106,7 +106,7 @@
                                                   method="POST" class="d-inline reset-pw-form">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-outline-warning px-2 py-1"
-                                                        title="Reset Password ke 'password123'">
+                                                        title="Reset Password ke 'SISPPG123'">
                                                     <i class="fas fa-key"></i>
                                                 </button>
                                             </form>
