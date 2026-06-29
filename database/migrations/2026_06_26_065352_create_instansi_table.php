@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('penanggung_jawab');
             $table->string('telepon');
             $table->string('email')->unique();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null')->unique();
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }
